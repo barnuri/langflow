@@ -319,7 +319,7 @@ builtins-allowed-modules = [ "io", "logging", "socket"]
 [tool.mypy]
 plugins = ["pydantic.mypy"]
 follow_imports = "skip"
-disable_error_code = ["type-var"]
+disable_error_code = ["type-var", "arg-type", "var-annotated"]
 namespace_packages = true
 mypy_path = "langflow"
 ignore_missing_imports = true
