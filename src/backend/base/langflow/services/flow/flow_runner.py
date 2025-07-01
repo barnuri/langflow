@@ -229,6 +229,7 @@ class LangflowRunnerExperimental:
             flows = await session.exec(select(Flow.id).where(Flow.user_id == user_id))
             flow_ids: list[UUID] = [fid for fid in flows.scalars().all() if fid is not None]
             if flow_ids:
+                # Use .in_() on the SQLAlchemy column, not on the list of UUIDs
                 await session.exec(delete(MessageTable).where(MessageTable.flow_id.in_(flow_ids)))
                 await session.exec(delete(Flow).where(Flow.id.in_(flow_ids)))
             await session.exec(delete(Variable).where(Variable.user_id == user_id))
